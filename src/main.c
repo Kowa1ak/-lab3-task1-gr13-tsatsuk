@@ -8,28 +8,13 @@
 
 #include <stdio.h>
 #include <string.h>
-
-int remove_even_chars(char *str) {
-    int len = strlen(str);
-    int i, j, count = 0;
-    for (i = 1; i < len; i += 2) {
-        for (j = i; j < len - 1; j++) {
-            str[j] = str[j + 1];
-        }
-        str[j] = '\0';
-        count++;
-        len--;
-    }
-    return count;
-}
-
+#include "interface.h"
 int main() {
     char str[100];
     printf("Enter a string: ");
-    fgets(str, 100, stdin);
-    str[strcspn(str, "\n")] = '\0'; // remove newline character from fgets
-    int count = remove_even_chars(str);
-    printf("String after removal of even chars: %s\n", str);
-    printf("Number of characters removed: %d\n", count);
+    fgets(str, sizeof(str), stdin);
+    int removed = remove_even(str);
+    printf("Number of removed characters: %d\n", removed);
     return 0;
 }
+
